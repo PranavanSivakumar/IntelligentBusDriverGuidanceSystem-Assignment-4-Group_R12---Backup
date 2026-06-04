@@ -6,10 +6,23 @@ import com.busguidance.validation.DriverValidator;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * Handles all file-based persistence operations for Driver records.
+ * Provides CRUD operations (add, retrieve, update, count, getAll)
+ * backed by a plain-text flat file.
+ */
 
 public class DriverRepository {
 
     private static final String FILE_PATH = "data/drivers.txt";
+    /**
+     * Adds a new driver to the data file after validating their details.
+     * Validates driver ID, address, and birthdate before writing.
+     * Also checks for duplicate driver IDs.
+     *
+     * driver The Driver object to be added
+     * @return true if the driver was successfully added, false if validation fails or duplicate exists
+     */
 
     public boolean add(Driver driver) {
 
@@ -116,6 +129,13 @@ public class DriverRepository {
 
         return count;
     }
+    /**
+     * Reads all driver records from the file and returns them as a list.
+     * Each line is parsed into a Driver object by splitting on commas.
+     *
+     * @return A List of all Driver objects found in the file; empty list if file is unreadable
+     */
+
 
     public List<Driver> getAllDrivers() {
 
@@ -146,6 +166,13 @@ public class DriverRepository {
 
         return drivers;
     }
+     /**
+     * Overwrites the data file with the provided list of drivers.
+     * Used internally by update() to persist changes after modifying the in-memory list.
+     *
+     * @param drivers The updated list of Driver objects to write to file
+     * @return true if the file was successfully rewritten, false if an IOException occurred
+     */
 
     private boolean rewriteFile(List<Driver> drivers) {
 
