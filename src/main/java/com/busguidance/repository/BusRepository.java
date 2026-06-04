@@ -8,15 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BusRepository {
+    // File used to store bus records
 
     private static final String FILE_PATH = "data/buses.txt";
-
+    // adds a new bus to the file
     public boolean add(Bus bus) {
 
         if (!BusValidator.isValidBusID(bus.getBusID())) {
             return false;
         }
-
+        // Prevents duplicate bus IDs
         if (retrieve(bus.getBusID()) != null) {
             return false;
         }
@@ -32,6 +33,7 @@ public class BusRepository {
             return false;
         }
     }
+    // Retrieves a bus using its ID
 
     public Bus retrieve(String busID) {
 
@@ -60,6 +62,7 @@ public class BusRepository {
 
         return null;
     }
+    // Updates an existing bus record
 
     public boolean update(String busID, Bus updatedBus) {
 
@@ -94,6 +97,7 @@ public class BusRepository {
 
         return rewriteFile(buses);
     }
+    // Returns total number of buses stored
 
     public int count() {
 
@@ -111,6 +115,7 @@ public class BusRepository {
 
         return count;
     }
+    // Loads all bus records from file
 
     public List<Bus> getAllBuses() {
 
@@ -140,6 +145,7 @@ public class BusRepository {
 
         return buses;
     }
+    // Rewrites the entire file after updates
 
     private boolean rewriteFile(List<Bus> buses) {
 
